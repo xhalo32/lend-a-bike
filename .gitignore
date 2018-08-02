@@ -1,1 +1,4 @@
 .sw*
+yarn.lock
+node_modules/
+data/

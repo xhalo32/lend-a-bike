@@ -1,3 +1,3 @@
 #!/bin/sh
 
-cd /frontend/app/ && npm start
+cd /frontend && npm start
