@@ -40,7 +40,8 @@ services:
             - MONGO_DATA_DIR=/data/db
         volumes:
             - ./data/db/:/data/db/
-        # command: mongod --smallfiles
+            - ./mongo_init.js:/docker-entrypoint-initdb.d/mongo_init.js
+        command: mongod --auth
         healthcheck:
             test: "exit 0"
 

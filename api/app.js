@@ -1,12 +1,14 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const routePosts = require('./routes/posts');
 
 const app = express();
 const PREFIX = process.env.API_ROUTE_PREFIX;
 
+mongoose.connect('mongodb://miika:salasana@database/posts');
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
