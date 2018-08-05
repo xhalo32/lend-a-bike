@@ -6,9 +6,10 @@ const Post = require('../models/post');
 const router = express.Router();
 
 router.get('/', (req, res, _) => {
-  res.status(200).json({
-    message: 'get request',
-  });
+  res.status(200)
+    .json({
+      message: 'get request',
+    });
 });
 
 router.post('/', (req, res, _) => {
@@ -20,12 +21,37 @@ router.post('/', (req, res, _) => {
   post.save()
     .then((result) => {
       console.log(result);
+      res.status(200)
+        .json({
+          message: 'post request',
+          createdPost: post,
+        });
     })
     .catch(err => console.error(err));
-  res.status(200).json({
-    message: 'post request',
-    createdPost: post,
-  });
+});
+
+router.patch('/:postId', (req, res, _) => {
+  const id = req.params.postId;
+  console.log(id, req.body);
+  Post.update({
+    _id: id,
+  }, req.body)
+    .then((result) => {
+      console.log(result);
+      res.status(200)
+        .json(result);
+    })
+    .catch((error) => {
+      res.status(500)
+        .json(error);
+    });
+  Post.findOne({ _id: id })
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 });
 
 module.exports = router;
