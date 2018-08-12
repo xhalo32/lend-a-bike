@@ -59,7 +59,6 @@ router.post('/', (req, res, _) => {
 
 router.patch('/:postId', (req, res, _) => {
   const id = req.params.postId;
-  console.log(id, req.body);
   Post.update({
     _id: id,
   }, req.body)

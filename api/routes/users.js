@@ -30,10 +30,11 @@ router.post('/signup', (req, res, _) => {
             _id: new mongoose.Types.ObjectId(),
             email: req.body.email,
             password: hash,
+            nickname: req.body.nickname || req.body.email.match(/([-.\w]+).*@/i)[1],
           });
           user.save()
             .then((result) => {
-              res.status(200)
+              res.status(201)
                 .json(result);
             })
             .catch((saveError) => {

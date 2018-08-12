@@ -41,7 +41,7 @@ router.get('/', (req, res, _) => {
 });
 
 router.post('/', auth, (req, res, next) => {
-  console.log('moi');
+  console.log(`${req.tokenData.email} uploaded an image!`);
   next();
 }, upload.single('image'), (req, res, _) => {
   new Image({
