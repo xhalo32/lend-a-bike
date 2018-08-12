@@ -6,9 +6,36 @@ const Post = require('../models/post');
 const router = express.Router();
 
 router.get('/', (req, res, _) => {
-  res.status(200)
-    .json({
-      message: 'get request',
+  Post.find()
+    .select('_id sender text')
+    .then((result) => {
+      res.status(200)
+        .json(result);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500)
+        .json({
+          error,
+        });
+    });
+});
+
+router.get('/:postId', (req, res, _) => {
+  Post.findOne({
+    _id: req.params.postId,
+  })
+    .select('_id sender text')
+    .then((result) => {
+      res.status(200)
+        .json(result);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500)
+        .json({
+          error,
+        });
     });
 });
 

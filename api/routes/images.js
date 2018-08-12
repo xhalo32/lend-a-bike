@@ -3,6 +3,7 @@ const multer = require('multer');
 const mongoose = require('mongoose');
 
 const Image = require('../models/image');
+const auth = require('../auth');
 
 const router = express.Router();
 const storage = multer.diskStorage({
@@ -27,15 +28,22 @@ router.get('/', (req, res, _) => {
   Image.find()
     .select('_id file')
     .then((results) => {
-      res.status(200).json(results);
+      res.status(200)
+        .json(results);
     })
     .catch((error) => {
       console.error(error);
-      res.status(500).json({ error });
+      res.status(500)
+        .json({
+          error,
+        });
     });
 });
 
-router.post('/', upload.single('image'), (req, res, _) => {
+router.post('/', auth, (req, res, next) => {
+  console.log('moi');
+  next();
+}, upload.single('image'), (req, res, _) => {
   new Image({
     _id: new mongoose.Types.ObjectId(),
     file: req.file,
@@ -47,7 +55,9 @@ router.post('/', upload.single('image'), (req, res, _) => {
     })
     .catch((error) => {
       res.status(400)
-        .json({ error: error.toString() });
+        .json({
+          error: error.toString(),
+        });
       console.log(error);
     });
 });

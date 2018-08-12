@@ -5,6 +5,8 @@ module.exports = {
             "varsIgnorePattern": "^_+",
             "argsIgnorePattern": "^_+",
         }],
+        "no-control-regex": 0,
+        "no-underscore-dangle": ["error", { "allow": ["_id"] }],
     },
     "extends": "airbnb-base",
 };
