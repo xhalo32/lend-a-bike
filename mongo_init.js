@@ -1,4 +1,9 @@
-db = db.getSiblingDB('posts');
-db.createUser({ user: "miika", pwd: "salasana", roles: [{
-	role: "readWrite", db: "posts"
-}] });
+posts = db.getSiblingDB('posts');
+posts.createUser({
+    user: "memoadmin",
+    pwd: "salasana",
+    roles: [{
+        role: "readWrite",
+        db: "posts",
+    }],
+});

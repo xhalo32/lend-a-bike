@@ -11,7 +11,7 @@ const routeMemos = require('./routes/memos');
 const app = express();
 const PREFIX = process.env.API_ROUTE_PREFIX;
 
-mongoose.connect('mongodb://miika:salasana@database/posts');
+mongoose.connect('mongodb://memoadmin:salasana@database/posts');
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
