@@ -23,7 +23,7 @@ const styles = theme => ({
   root: {
     marginTop: 20,
     flexGrow: 1,
-    maxWidth: 600,
+    //maxWidth: 600,
     padding: theme.spacing.unit * 2,
   },
   close: {
@@ -109,85 +109,93 @@ class Login extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <Paper className={`${classes.root} ${classes.center}`}>
-        <Grid
-          container
-          direction='row'
-          justify='center'
-          alignItems='flex-start'
-        >
-          <Grid item xs={12}>
-            <TextField
-              id='email'
-              label='Email'
-              value={this.state.name}
-              onChange={this.handleChange('email')}
-              margin='normal'
-              fullWidth
-            />
+      <Grid
+        container
+        direction='row'
+        justify='center'
+      >
+        <Grid item xs={12} sm={8}>
+        <Paper className={`${classes.root} ${classes.center}`}>
+          <Grid
+            container
+            direction='row'
+            justify='center'
+            alignItems='flex-start'
+          >
+            <Grid item xs={12}>
+              <TextField
+                id='email'
+                label='Email'
+                value={this.state.name}
+                onChange={this.handleChange('email')}
+                margin='normal'
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                id='password'
+                label='Password'
+                type='password'
+                value={this.state.password}
+                onChange={this.handleChange('password')}
+                margin='normal'
+                fullWidth
+              />
+            </Grid>
+            <Grid item>
+              <Button
+                color='secondary'
+                variant='contained'
+                onClick={this.handleSubmit}
+                className={classes.Button}
+                disabled={this.state.disableSubmit}
+              >
+                Submit
+              </Button>
+            </Grid>
           </Grid>
-          <Grid item xs={12}>
-            <TextField
-              id='password'
-              label='Password'
-              type='password'
-              value={this.state.password}
-              onChange={this.handleChange('password')}
-              margin='normal'
-              fullWidth
-            />
-          </Grid>
-          <Grid item>
-            <Button
-              color='secondary'
-              variant='contained'
-              onClick={this.handleSubmit}
-              className={classes.Button}
-              disabled={this.state.disableSubmit}
-            >
-              Submit
-            </Button>
-          </Grid>
+
+          <Snackbar
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center',
+            }}
+            open={this.state.snackOpen}
+            autoHideDuration={6000}
+            onClose={this.handleClose}
+            ContentProps={{
+              'aria-describedby': 'message-id',
+            }}
+            message={
+              <span id="message-id">
+                You are signed in
+              </span>
+            }
+            action={[
+              <Button
+                key="undo"
+                color="secondary"
+                size="small"
+                onClick={() => this.setState({ redirectHome: true })}>
+                HOME
+              </Button>,
+              <IconButton
+                key="close"
+                aria-label="Close"
+                color="inherit"
+                className={classes.close}
+                onClick={this.handleClose}
+              >
+                <Close />
+              </IconButton>,
+            ]}
+          />
+
+          {this.renderRedirect()}
+        </Paper>
         </Grid>
-
-        <Snackbar
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center',
-          }}
-          open={this.state.snackOpen}
-          autoHideDuration={6000}
-          onClose={this.handleClose}
-          ContentProps={{
-            'aria-describedby': 'message-id',
-          }}
-          message={
-            <span id="message-id">
-              You are signed in
-            </span>
-          }
-          action={[
-            <Button
-              key="undo"
-              color="secondary"
-              size="small"
-              onClick={() => this.setState({ redirectHome: true })}>
-              HOME
-            </Button>,
-            <IconButton
-              key="close"
-              aria-label="Close"
-              color="inherit"
-              className={classes.close}
-              onClick={this.handleClose}
-            >
-              <Close />
-            </IconButton>,
-          ]}
-        />
-
-        {this.renderRedirect()}
-      </Paper>
+      </Grid>
     );
   }
 }
