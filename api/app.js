@@ -3,10 +3,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-// const routePosts = require('./routes/posts');
-// const routeImages = require('./routes/images');
-const routeUsers = require('./routes/users');
-const routeMemos = require('./routes/memos');
+const routeLendings = require('./routes/lendings');
 
 const app = express();
 const PREFIX = process.env.API_ROUTE_PREFIX;
@@ -17,10 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Define route middleware
-// app.use(`${PREFIX}/posts`, routePosts);
-// app.use(`${PREFIX}/images`, routeImages);
-app.use(`${PREFIX}/users`, routeUsers);
-app.use(`${PREFIX}/memos`, routeMemos);
+app.use(`${PREFIX}/lendings`, routeLendings);
 
 // Throw a new error when the route is not found
 app.use((req, res, next) => {

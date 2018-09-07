@@ -3,7 +3,6 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  Button,
 } from '@material-ui/core';
 
 const styles = {
@@ -22,15 +21,8 @@ export default class Titlebar extends Component {
             color='inherit'
             style={styles.flex}
           >
-            Memoserver
+            Lend-a-Bike
           </Typography>
-          <Button
-            variant='text'
-            color='inherit'
-            href='/login'
-          >
-            Log in
-          </Button>
         </Toolbar>
       </AppBar>
     );
